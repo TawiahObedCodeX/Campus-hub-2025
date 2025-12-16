@@ -1,0 +1,30 @@
+.custom-phone-input {
+  width: 100%;
+  height: 44px; /* match h-11 */
+  padding: 0 1rem 0 ; /* align with text inputs: px-4 and space for flag */
+  border-radius: 2rem; /* match rounded-2xl visually */
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Inner input normalization */
+.custom-phone-input .react-phone-number-input__input {
+  height: 44px;
+  line-height: 44px;
+  font-size: 0.875rem;
+}
+
+.custom-phone-input .react-phone-number-input__country {
+  height: 44px;
+}
+
+.custom-phone-input .react-phone-number-input__icon {
+  height: 24px;
+  width: 24px;
+}
+
+.custom-phone-input:focus {
+  border-color: #16a34a; /* Assuming Green-100 is green */
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2); /* focus:ring-green-100 */
+}

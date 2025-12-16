@@ -9,9 +9,9 @@ export default function Navber() {
 
     const navLinks = [
         { label: "Home", path: "/" },
-        { label: "Gigs", path: "/Gigs" },
+        { label: "Gigs", path: "/gigs" },
         { label: "Event", path: "" },
-        { label: "Explore", path: "/Explore" },
+        { label: "Explore", path: "/explore" },
     ];
 
     return (

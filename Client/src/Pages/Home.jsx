@@ -59,14 +59,11 @@ export default function Home() {
 
           <div className="max-w-2xl mx-auto space-y-4">
             {[
-              "Gig Marketplace",
-              "Event Hub",
-              "Skill Connect",
-              "Student Marketplace",
-              "Social Networking",
-              "Career Growth",
-              "Student Planner",
-              "Scholarships & Funding",
+              "Career & Networking ",
+              "Academics & Social Engine",
+              "Marketplace & Commerce",
+              "Finance & Community",
+              "Trust & Engagements"
             ].map((item) => (
               <div
                 key={item}
@@ -79,7 +76,7 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-16">
+          <div className="text-center mt-40">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               Ready to Join the Community?
             </h2>

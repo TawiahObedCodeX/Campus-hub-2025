@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Formbg from '../assets/BGIMAGE/formbg.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
@@ -8,6 +8,7 @@ import './PhoneInput.css';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm();
@@ -62,9 +63,19 @@ export default function Signup() {
   const allComplete = currentStep >= requirements.length;
   const currentReq = currentStep < requirements.length ? requirements[currentStep] : null;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (!allComplete) return;
-    console.log('Submitted:', data);
+    
+    try {
+      // TODO: Add API call to create account
+      console.log('Submitted:', data);
+      
+      // After successful account creation, navigate to role selection
+      navigate('/onboarding/role');
+    } catch (error) {
+      console.error('Signup error:', error);
+      // TODO: Handle error (show error message to user)
+    }
   };
 
   return (

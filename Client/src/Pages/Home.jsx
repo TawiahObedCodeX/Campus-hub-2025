@@ -30,24 +30,35 @@ export default function Home() {
 
           {/* HERO IMAGE - Larger circle; student centered and anchored to bottom */}
           <div className="mt-16 flex justify-center">
-            <div className="relative shrink-0">
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
-                {/* Green Circle Background */}
-                <div className="absolute inset-0 bg-lightGreen-100 rounded-full" />
-                {/* Student Image */}
-                <img
-                  src={student}
-                  alt="Happy Student"
-                  className="absolute bottom-0 left-1/2 -translate-x-1/3 w-[105%] sm:w-[108%] md:w-[112%] lg:w-[115%] xl:w-[118%] h-auto object-cover drop-shadow-2xl pointer-events-none"
-                />
-              </div>
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+              {/* Green circular background */}
+              <div className="absolute inset-0  bg-lightGreen-100 rounded-full" />
+
+              {/* Much bigger student image */}
+              <img
+                src={student}
+                alt="Happy Student"
+                className="
+        absolute inset-0
+        scale-175                      /* 75% larger than the container */
+        object-contain
+        drop-shadow-2xl
+        pointer-events-none
+       md:top-32
+        md:left-24
+         lg:top-36
+        lg:left-28
+        top-24
+        left-16
+      "
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* REST OF THE PAGE - Also fully Tailwind & responsive */}
-      <section className="px-4 sm:px-6 lg:px-8 py-16">
+      <section className="px-4 sm:px-6 lg:px-8 md:py-40 py-20">
         <div className="max-w-7xl mx-auto">
           {/* Features */}
           <div className="text-center mb-12">
@@ -76,7 +87,7 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-40">
+          <div className="text-center mt-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               Ready to Join the Community?
             </h2>

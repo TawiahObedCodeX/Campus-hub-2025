@@ -32,10 +32,10 @@ export default function Navber() {
                             <Link
                                 key={item.path}
                                 to={item.path}
-                                className={`px-3 py-2 rounded-xl transition duration-200 whitespace-nowrap ${
+                                className={`px-5 py-2 rounded-4xl transition duration-200 whitespace-nowrap ${
                                     location.pathname === item.path
-                                        ? "bg-green-950 text-white font-medium"
-                                        : "hover:bg-green-950/50"
+                                        ? "bg-[#6CAB2D33] text-white font-medium"
+                                        : "hover:bg-[#6CAB2D33]"
                                 }`}
                             >
                                 {item.label}
@@ -49,7 +49,7 @@ export default function Navber() {
                             to="/login"
                             className="bg-Green-100 text-black font-semibold 
                                        px-5 py-2.5 sm:px-6 sm:py-3 
-                                       rounded-2xl flex items-center gap-2 
+                                       rounded-4xl flex items-center gap-2 
                                        hover:bg-Green-200 transition text-sm sm:text-base"
                         >
                             Login
@@ -88,7 +88,7 @@ export default function Navber() {
                             <Link
                                 to="/login"
                                 onClick={() => setOpen(false)}
-                                className="bg-Green-100 text-black font-semibold px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-Green-200 transition mt-4"
+                                className="bg-Green-100 text-black font-semibold px-6 py-3 rounded-4xl flex items-center justify-center gap-2 hover:bg-Green-200 transition mt-4"
                             >
                                 Login
                                 <BsArrowRight className="text-xl" />

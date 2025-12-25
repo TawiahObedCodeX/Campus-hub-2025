@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsCheckCircle, BsExclamationCircle } from 'react-icons/bs';
 import { HiOutlineDocument } from 'react-icons/hi';
@@ -8,13 +8,7 @@ import refreshIcon from '../assets/Icons/vuesax/bulk/refresh-2.svg';
 export default function OnboardingStudentID() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [uploadStatus, setUploadStatus] = useState('idle'); // 'idle', 'uploading', 'completed'
-
-  // Restore state from localStorage on mount
-  useEffect(() => {
+  const [uploadData, setUploadData] = useState(() => {
     const savedData = localStorage.getItem('onboarding_student_id');
     if (savedData) {
       try {
@@ -26,29 +20,37 @@ export default function OnboardingStudentID() {
             size: data.fileSize || 350000,
             type: data.fileType || 'image/jpeg'
           };
-          setSelectedFile(mockFile);
-          setImagePreview(data.imagePreview);
-          setUploadStatus('completed');
-          setUploadProgress(100);
+          return {
+            selectedFile: mockFile,
+            imagePreview: data.imagePreview,
+            uploadStatus: 'completed',
+            uploadProgress: 100
+          };
         }
       } catch (error) {
         console.error('Error restoring saved file:', error);
       }
     }
-  }, []);
+    return {
+      selectedFile: null,
+      imagePreview: null,
+      uploadProgress: 0,
+      uploadStatus: 'idle' // 'idle', 'uploading', 'completed'
+    };
+  });
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file);
-      
+      setUploadData(prev => ({ ...prev, selectedFile: file, uploadStatus: 'uploading', uploadProgress: 0 }));
+
       // Create preview for image files
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onloadend = () => {
           const preview = reader.result;
-          setImagePreview(preview);
-          
+          setUploadData(prev => ({ ...prev, imagePreview: preview }));
+
           // Save to localStorage
           localStorage.setItem('onboarding_student_id', JSON.stringify({
             fileName: file.name,
@@ -60,7 +62,7 @@ export default function OnboardingStudentID() {
         };
         reader.readAsDataURL(file);
       } else {
-        setImagePreview(null);
+        setUploadData(prev => ({ ...prev, imagePreview: null }));
         // Save PDF info
         localStorage.setItem('onboarding_student_id', JSON.stringify({
           fileName: file.name,
@@ -70,16 +72,13 @@ export default function OnboardingStudentID() {
           uploadStatus: 'completed'
         }));
       }
-      
-      setUploadStatus('uploading');
-      setUploadProgress(0);
-      
+
       // Simulate upload progress
       const interval = setInterval(() => {
-        setUploadProgress((prev) => {
-          if (prev >= 100) {
+        setUploadData(prev => {
+          const newProgress = prev.uploadProgress + 10;
+          if (newProgress >= 100) {
             clearInterval(interval);
-            setUploadStatus('completed');
             // Update localStorage with completed status
             const savedData = localStorage.getItem('onboarding_student_id');
             if (savedData) {
@@ -87,9 +86,9 @@ export default function OnboardingStudentID() {
               data.uploadStatus = 'completed';
               localStorage.setItem('onboarding_student_id', JSON.stringify(data));
             }
-            return 100;
+            return { ...prev, uploadProgress: 100, uploadStatus: 'completed' };
           }
-          return prev + 10;
+          return { ...prev, uploadProgress: newProgress };
         });
       }, 200);
     }
@@ -116,7 +115,7 @@ export default function OnboardingStudentID() {
   };
 
   const handleContinue = () => {
-    if (uploadStatus === 'completed') {
+    if (uploadData.uploadStatus === 'completed') {
       navigate('/onboarding/step4');
     }
   };
@@ -183,14 +182,14 @@ export default function OnboardingStudentID() {
         </div>
 
         {/* Uploaded File Display */}
-        {selectedFile && (
+        {uploadData.selectedFile && (
           <div className="mb-4 p-3 bg-white border rounded-2xl" style={{ borderColor: '#E8F5E9' }}>
             <div className="flex items-center gap-3">
               <div className="shrink-0">
-                {imagePreview ? (
-                  <img 
-                    src={imagePreview} 
-                    alt="Uploaded student ID" 
+                {uploadData.imagePreview ? (
+                  <img
+                    src={uploadData.imagePreview}
+                    alt="Uploaded student ID"
                     className="w-10 h-10 rounded-lg object-cover"
                   />
                 ) : (
@@ -201,36 +200,36 @@ export default function OnboardingStudentID() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-800 truncate mb-1.5">
-                  {selectedFile.name}
+                  {uploadData.selectedFile.name}
                 </p>
-                {uploadStatus === 'uploading' && (
+                {uploadData.uploadStatus === 'uploading' && (
                   <>
                     <div className="mb-1.5 flex items-center gap-2 text-xs text-gray-500">
                       <span>
-                        {Math.round((uploadProgress / 100) * (selectedFile.size || 350000) / 1024)} of {formatFileSize(selectedFile.size || 350000)}
+                        {Math.round((uploadData.uploadProgress / 100) * (uploadData.selectedFile.size || 350000) / 1024)} of {formatFileSize(uploadData.selectedFile.size || 350000)}
                       </span>
                     </div>
                     <div className="mb-1.5 w-full bg-gray-200 rounded-full h-1">
                       <div
                         className="bg-Green-100 h-1 rounded-full transition-all duration-300"
-                        style={{ width: `${uploadProgress}%` }}
+                        style={{ width: `${uploadData.uploadProgress}%` }}
                       />
                     </div>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <img 
-                        src={refreshIcon} 
-                        alt="Uploading" 
+                      <img
+                        src={refreshIcon}
+                        alt="Uploading"
                         className="w-4 h-4 animate-spin"
                       />
                       <span>Uploading...</span>
                     </div>
                   </>
                 )}
-                {uploadStatus === 'completed' && (
+                {uploadData.uploadStatus === 'completed' && (
                   <>
                     <div className="mb-1.5 flex items-center gap-2 text-xs text-gray-500">
                       <span>
-                        {formatFileSize(selectedFile.size || 350000)} of {formatFileSize(selectedFile.size || 350000)}
+                        {formatFileSize(uploadData.selectedFile.size || 350000)} of {formatFileSize(uploadData.selectedFile.size || 350000)}
                       </span>
                     </div>
                     <div className="mb-1.5 w-full bg-Green-100 rounded-full h-1" />
@@ -264,9 +263,9 @@ export default function OnboardingStudentID() {
         <button
           type="button"
           onClick={handleContinue}
-          disabled={uploadStatus !== 'completed'}
+          disabled={uploadData.uploadStatus !== 'completed'}
           className={`w-full h-12 rounded-4xl font-semibold text-base transition-all duration-200 ${
-            uploadStatus === 'completed'
+            uploadData.uploadStatus === 'completed'
               ? 'bg-Green-100 hover:bg-green-600 text-white shadow-md hover:shadow-lg'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}

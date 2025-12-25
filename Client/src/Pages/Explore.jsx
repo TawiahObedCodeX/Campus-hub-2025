@@ -22,10 +22,10 @@ export default function Explore() {
 
                     {/* TOP HERO SECTION */}
                     <section className="relative w-full max-w-5xl rounded-2xl overflow-hidden">
-                        <div className="relative px-6 sm:px-10 py-12 sm:py-16 lg:py-20 flex flex-col items-center text-center bg-gradient-to-tl from-green-50 via-lime-50 to-yellow-50">
+                        <div className="relative px-6 sm:px-10 py-12 sm:py-16 lg:py-20 flex flex-col items-center text-center bg-linear-to-tl from-green-50 via-lime-50 to-yellow-50">
                             {/* Edge fade overlays */}
-                            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-20 lg:w-32 bg-gradient-to-r from-white to-transparent opacity-70" />
-                            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 lg:w-32 bg-gradient-to-l from-white to-transparent opacity-70" />
+                            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-20 lg:w-32 bg-linear-to-r from-white to-transparent opacity-70" />
+                            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 lg:w-32 bg-linear-to-l from-white to-transparent opacity-70" />
 
                             <h1 className="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-semibold">Why CampusHub?</h1>
                             <p className="relative z-10 mt-3 sm:mt-4 text-base sm:text-lg lg:text-xl text-gray-700 max-w-3xl">
@@ -61,7 +61,7 @@ export default function Explore() {
                                         let our Smart Match Algorithm instantly pair you with gigs that fit<br className="hidden sm:inline" />
                                         your potential.
                                     </p>
-                                    <div className="w-full h-[1px] bg-Green-100/20"></div>
+                                    <div className="w-full h-px bg-Green-100/20"></div>
                                     <p>
                                         <b>Dynamic Digital Identity</b> <br />
                                         Go beyond the static PDF resume. Build a living portfolio that evolves<br className="hidden sm:inline" />
@@ -89,7 +89,7 @@ export default function Explore() {
                                         Vault, launch fluid Interest Groups, and communicate securely with End-to-End<br className="hidden sm:inline" />
                                         Encrypted Chat.
                                     </p>
-                                    <div className="w-full h-[1px] bg-Green-100/20"></div>
+                                    <div className="w-full h-px bg-Green-100/20"></div>
                                     <p>
                                         <b>V-Meet Cognitive Studio (Learning & AI)</b> <br />
                                         Experience the future of virtual learning. Step into persistent Co-Working Spaces<br className="hidden sm:inline" />
@@ -106,26 +106,31 @@ export default function Explore() {
                                     <img src={Teacher} alt="" className='w-6 h-6 sm:w-8 sm:h-8' />
                                     <h1 className="text-sm sm:text-base font-medium">FINANCE & COMMUNITY</h1>
                                 </div>
-                                <div className="bg-gray-300/35 w-full rounded-3xl flex flex-col lg:flex-row justify-center items-center p-6 sm:p-8 lg:p-10 gap-8 lg:gap-12">
-                                    <img src={Finace} alt="" className='w-full max-w-sm sm:max-w-md object-contain' />
-                                    <div className="flex flex-col gap-8 text-left text-sm sm:text-base max-w-xl">
-                                        <div>
-                                            <p className="leading-relaxed">
-                                                <span className="font-bold block">Smart Finance & Vaults</span>
-                                                Master your student economy. Take control with an automated expense
-                                                tracker and smart budgeting tool that visualizes your net worth.
-                                                Planning a trip or project? Pool resources securely with friends using
-                                                group vault savings for transparent, collaborative growth.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p className="leading-relaxed">
-                                                <span className="font-bold block">Events Hub & Academic Planner</span>
-                                                Your semester, streamlined. Discover and book tickets for trending
-                                                campus events or manage your schedule with the smart academic calendar.
-                                                Stay ahead with automated deadline reminders that seamlessly sync your
-                                                social life with your study goals.
-                                            </p>
+                                <div className="bg-gray-300/35 w-full rounded-3xl overflow-hidden flex flex-col lg:flex-row items-stretch">
+                                    {/* Left: Image - full height, rounded corners on small screens, only left side on lg+ */}
+                                    <div className="w-full lg:w-md h-64 sm:h-80 lg:h-auto relative  overflow-hidden">
+                                        <img
+                                            src={Finace}
+                                            alt="Smart Finance Illustration"
+                                            className="absolute inset-0 w-full h-full object-cover"
+                                        />
+                                    </div>
+
+                                    {/* Right: Text content - full height, flex start alignment */}
+                                    <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 lg:p-10 lg:rounded-tr-3xl lg:rounded-br-3xl">
+                                        <div className="flex flex-col gap-6 sm:gap-8 text-left max-w-xl">
+                                            <div>
+                                                <p className="leading-relaxed text-sm sm:text-base">
+                                                    <span className="font-bold block text-lg sm:text-xl">Smart Finance & Vaults</span>
+                                                    Master your student economy. Take control with an automated expense tracker and smart budgeting tool that visualizes your net worth. Planning a trip or project? Pool resources securely with friends using group vault savings for transparent, collaborative growth.
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className="leading-relaxed text-sm sm:text-base">
+                                                    <span className="font-bold block text-lg sm:text-xl">Events Hub & Academic Planner</span>
+                                                    Your semester, streamlined. Discover and book tickets for trending campus events or manage your schedule with the smart academic calendar. Stay ahead with automated deadline reminders that seamlessly sync your social life with your study goals.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -137,26 +142,31 @@ export default function Explore() {
                                     <img src={Teacher} alt="" className='w-6 h-6 sm:w-8 sm:h-8' />
                                     <h1 className="text-sm sm:text-base font-medium">TRUST & ENGAGEMENTS</h1>
                                 </div>
-                                <div className="bg-gray-300/35 w-full rounded-3xl flex flex-col lg:flex-row justify-center items-center p-6 sm:p-8 lg:p-10 gap-8 lg:gap-12">
-                                    <img src={Trust} alt="" className='w-full max-w-sm sm:max-w-md object-contain' />
-                                    <div className="flex flex-col gap-8 text-left text-sm sm:text-base max-w-xl">
-                                        <div>
-                                            <p className="leading-relaxed">
-                                                <span className="font-bold block">The Agora Market (Fun & Engagements)</span>
-                                                Tap into the campus pulse. Participate in the decentralized Campus Oracle
-                                                to predict event outcomes and gauge student sentiment. Earn Platform
-                                                Points for your insights and watch the Community Consensus unfold
-                                                in real-time.
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p className="leading-relaxed">
-                                                <span className="font-bold block">Verified Trust Gateway</span>
-                                                Say goodbye to bots and scammers. Our Mandatory OCR Verification
-                                                ensures every profile is a real student. Interact with confidence using
-                                                Biometric-Ready Security and trusted Escrow Protection for every
-                                                transaction you make.
-                                            </p>
+                                <div className="bg-gray-300/35 w-full rounded-3xl overflow-hidden flex flex-col lg:flex-row items-stretch">
+                                    {/* Left: Image - full height, rounded corners on small screens, only left side on lg+ */}
+                                    <div className="w-full lg:w-md  h-64 sm:h-80 lg:h-auto relative  overflow-hidden">
+                                        <img
+                                            src={Trust}
+                                            alt="Verified Trust & Agora Market Illustration"
+                                            className="absolute inset-0 w-full h-full object-cover"
+                                        />
+                                    </div>
+
+                                    {/* Right: Text content - full height, flex start alignment */}
+                                    <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 lg:p-10 lg:rounded-tr-3xl lg:rounded-br-3xl">
+                                        <div className="flex flex-col gap-6 sm:gap-8 text-left max-w-xl">
+                                            <div>
+                                                <p className="leading-relaxed text-sm sm:text-base">
+                                                    <span className="font-bold block text-lg sm:text-xl">The Agora Market (Fun & Engagements)</span>
+                                                    Tap into the campus pulse. Participate in the decentralized Campus Oracle to predict event outcomes and gauge student sentiment. Earn Platform Points for your insights and watch the Community Consensus unfold in real-time.
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className="leading-relaxed text-sm sm:text-base">
+                                                    <span className="font-bold block text-lg sm:text-xl">Verified Trust Gateway</span>
+                                                    Say goodbye to bots and scammers. Our Mandatory OCR Verification ensures every profile is a real student. Interact with confidence using Biometric-Ready Security and trusted Escrow Protection for every transaction you make.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

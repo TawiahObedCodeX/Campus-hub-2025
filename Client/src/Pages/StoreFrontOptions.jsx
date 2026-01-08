@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo/Logo2.svg';
-import Formbg from '../assets/BGIMAGE/storefront.png';
+import Formbg from '../assets/BGIMAGE/formbg2.png';
 import { FaArrowLeftLong, FaChevronDown } from "react-icons/fa6";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
